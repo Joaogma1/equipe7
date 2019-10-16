@@ -1,8 +1,9 @@
 
+package Interfaces;
+
 import java.util.List;
 
-
-public interface BaseInterface<TEntity> {
+public interface InterfaceBase<TEntity> {
 
     void Add(TEntity obj);
 
