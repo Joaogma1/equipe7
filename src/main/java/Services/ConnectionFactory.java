@@ -10,13 +10,16 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionFactory {
-    static String url =  "jdbc:mysql://35.226.108.150:3306/TADSDISTRIBUIDORA";
+
+    static String url = "jdbc:mysql://35.226.108.150:3306/TADSDISTRIBUIDORA";
     static String login = "aplicacao";
     static String senha = "654321";
-    
-    public static Connection getConnection() {
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException {
         try {
-            return DriverManager.getConnection(url,login , senha);
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection c =  DriverManager.getConnection(url, login, senha);
+            return c;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,7 +29,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT * FROM TADSDISTRIBUIDORA.USUARIO  WHERE EMAIL = ? AND SENHA = ? AND ATIVO = 1";
+            String sql = "SELECT ID, EMAIL, ID_TIPO_USUARIO AS CARGO, ID_UNIDADE AS UNIDADE FROM TADSDISTRIBUIDORA.USUARIO  WHERE EMAIL = ? AND SENHA = ? AND ATIVO = 1";
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, email);
@@ -42,6 +44,8 @@ public class RepositorioUsuario implements InterfaceUsuario {
 
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {
@@ -78,8 +82,8 @@ public class RepositorioUsuario implements InterfaceUsuario {
         Usuario u = new Usuario();
         u.setId(rs.getInt("ID"));
         u.setEmail(rs.getString("EMAIL"));
-        u.getIdTipoUsuario().setId(rs.getInt("ID_TIPO_USUARIO"));
-        u.getIdUnidade().setId(rs.getInt("ID_UNIDADE"));
+        u.setIdUnidadeEmp(rs.getInt("UNIDADE"));
+        u.setidCargo(rs.getInt("CARGO"));
         return u;
     }
 

@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
 
@@ -27,6 +29,8 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
             pst.execute();
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {
@@ -57,6 +61,8 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
 
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {
@@ -87,6 +93,8 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
 
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {
@@ -115,6 +123,8 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
             
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {
@@ -140,6 +150,8 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
             
         } catch (SQLException e) {
             throw new RepException("Operação não realizada com sucesso.", e);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             try {
                 if (con != null) {

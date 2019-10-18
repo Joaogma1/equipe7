@@ -34,13 +34,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "USUARIO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id"),
-    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email"),
-    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha"),
-    @NamedQuery(name = "Usuario.findByAtivo", query = "SELECT u FROM Usuario u WHERE u.ativo = :ativo"),
+    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")
+    ,
+    @NamedQuery(name = "Usuario.findById", query = "SELECT u FROM Usuario u WHERE u.id = :id")
+    ,
+    @NamedQuery(name = "Usuario.findByEmail", query = "SELECT u FROM Usuario u WHERE u.email = :email")
+    ,
+    @NamedQuery(name = "Usuario.findBySenha", query = "SELECT u FROM Usuario u WHERE u.senha = :senha")
+    ,
+    @NamedQuery(name = "Usuario.findByAtivo", query = "SELECT u FROM Usuario u WHERE u.ativo = :ativo")
+    ,
     @NamedQuery(name = "Usuario.findByDataRegistro", query = "SELECT u FROM Usuario u WHERE u.dataRegistro = :dataRegistro")})
 public class Usuario implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -66,6 +72,26 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "ID_TIPO_USUARIO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TipoUsuario idTipoUsuario;
+
+    private int idCargo;
+
+    private int IdUnidadeEmp;
+
+    public int getidCargo() {
+        return idCargo;
+    }
+
+    public void setidCargo(int idCargo) {
+        this.idCargo = idCargo;
+    }
+
+    public int getIdUnidadeEmp() {
+        return IdUnidadeEmp;
+    }
+
+    public void setIdUnidadeEmp(int IdUnidadeEmp) {
+        this.IdUnidadeEmp = IdUnidadeEmp;
+    }
 
     public Usuario() {
     }
@@ -169,5 +195,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "Dominios.Usuario[ id=" + id + " ]";
     }
-    
+
 }

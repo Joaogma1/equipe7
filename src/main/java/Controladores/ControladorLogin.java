@@ -98,13 +98,15 @@ public class ControladorLogin extends HttpServlet {
         
         Usuario usuarioBuscado = _iusuario.buscarPorEmailSenha(loginVM.getEmail(),loginVM.getSenha());
         
+        Usuario teste = usuarioBuscado;
+        
         if (usuarioBuscado != null) {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("id", usuarioBuscado.getId());
-            sessao.setAttribute("cargo",usuarioBuscado.getIdTipoUsuario());
-            sessao.setAttribute("unidade",usuarioBuscado.getIdUnidade());
+            //sessao.setAttribute("cargo",usuarioBuscado.getIdTipoUsuario());
+            //sessao.setAttribute("unidade",usuarioBuscado.getIdUnidade());
             
-            response.sendRedirect("/index.jsp");
+            response.sendRedirect("/EquipeSetePi/index.jsp");
         }
 
         
