@@ -15,7 +15,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
             <a class="navbar-brand" href="">
-                <img src="https://i.imgur.com/3KJwBAE.png" height="50" width="50" alt="logo empresa"/>
+                <img src="${pageContext.request.contextPath}/images/logo.png" height="50" width="50" alt="logo empresa"/>
                 Distribuidora
             </a>
 
@@ -29,7 +29,7 @@
                         <a class="nav-link" href="#Sobre">Sobre a empresa</a>
                     </li>
                 </ul>
-                <a class= "btn btn-outline-primary my-2 my-sm-0" href="#">Entrada funcionarios</a>
+                <a class= "btn btn-outline-primary my-2 my-sm-0" href="${pageContext.request.contextPath}/login.jsp">Entrada funcionarios</a>
             </div>
         </nav>
 

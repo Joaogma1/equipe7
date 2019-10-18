@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ControladorTipoUsuario", urlPatterns = {"/TipoUsuario"})
+@WebServlet(name = "ControladorTipoUsuario", urlPatterns = {"/tipoUsuario"})
 public class ControladorTipoUsuario extends HttpServlet {
 
     private InterfaceTipoUsuario _iTipoUser;
@@ -68,13 +68,17 @@ public class ControladorTipoUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<TipoUsuario> tu = _iTipoUser.GetAll();
 
-        request.setAttribute("listaUsuarios", tu);
+            List<TipoUsuario> tu = _iTipoUser.GetAll();
 
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/usuarios.jsp");
-        dispatcher.forward(request, response);
+            request.setAttribute("lista", tu);
+
+            RequestDispatcher dispatcher
+                    = request.getRequestDispatcher("/tiposUsuarios.jsp");
+            dispatcher.forward(request, response);
+        
+        
+
     }
 
     /**
@@ -97,7 +101,7 @@ public class ControladorTipoUsuario extends HttpServlet {
         _iTipoUser.Add(tipoUser);
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/usuarios.jsp");
+                = request.getRequestDispatcher("/tiposUsuarios.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -115,37 +119,36 @@ public class ControladorTipoUsuario extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TipoUsuario tipoUser = new TipoUsuario();
-        
+
         String id = request.getParameter("id");
         request.setAttribute("id", id);
-        
+
         tipoUser.setId(new Integer(id));
 
-
         _iTipoUser.Remove(tipoUser.getId());
-        
+
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/usuarios.jsp");
+                = request.getRequestDispatcher("/tiposUsuarios.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         TipoUsuario tipoUser = new TipoUsuario();
-        
+
         String id = request.getParameter("id");
         String nome = request.getParameter("nome");
-        
+
         request.setAttribute("id", id);
         request.setAttribute("nome", nome);
-        
+
         tipoUser.setId(new Integer(id));
         tipoUser.setNome(nome);
 
         _iTipoUser.Update(tipoUser);
-        
+
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/usuarios.jsp");
+                = request.getRequestDispatcher("/tiposUsuarios.jsp");
         dispatcher.forward(request, response);
     }
 
