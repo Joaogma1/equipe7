@@ -113,6 +113,5 @@
         #Sobre2{
             margin-left: 5%;
         }
-        ///
     </style>
 </html>

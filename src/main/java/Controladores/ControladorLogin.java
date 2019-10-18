@@ -5,22 +5,30 @@
  */
 package Controladores;
 
+import Dominios.Usuario;
+import Interfaces.InterfaceUsuario;
+import Repositorios.RepositorioUsuario;
+import ViewModel.LoginViewModel;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Date;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Administrador
- */
-@WebServlet(name = "ControladorUsuario", urlPatterns = {"/usuario"})
-public class ControladorUsuario extends HttpServlet {
+
+@WebServlet(name = "ControladorLogin", urlPatterns = {"/login"})
+public class ControladorLogin extends HttpServlet {
+    
+    private InterfaceUsuario _iusuario;
+
+    public ControladorLogin() {
+        this._iusuario = new RepositorioUsuario();
+    }
+    
+    
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +48,10 @@ public class ControladorUsuario extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControladorUsuario</title>");            
+            out.println("<title>Servlet ControladorLogin</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControladorUsuario at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ControladorLogin at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         } finally {
@@ -63,12 +71,7 @@ public class ControladorUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Date dataAcesso = new Date();
-        request.setAttribute("dtAcesso", dataAcesso);
-        
-        RequestDispatcher dispatcher = 
-                request.getRequestDispatcher("/WEB-INF/Pages/testUsuario.jsp");
-        dispatcher.forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -82,7 +85,30 @@ public class ControladorUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        LoginViewModel loginVM = new LoginViewModel();
+        
+        loginVM.setEmail(request.getParameter("email"));
+        loginVM.setSenha(request.getParameter("senha"));
+
+        request.setAttribute("email", loginVM.getEmail());
+        request.setAttribute("senha", loginVM.getSenha());
+        
+
+        
+        Usuario usuarioBuscado = _iusuario.buscarPorEmailSenha(loginVM.getEmail(),loginVM.getSenha());
+        
+        if (usuarioBuscado != null) {
+            HttpSession sessao = request.getSession();
+            sessao.setAttribute("id", usuarioBuscado.getId());
+            sessao.setAttribute("cargo",usuarioBuscado.getIdTipoUsuario());
+            sessao.setAttribute("unidade",usuarioBuscado.getIdUnidade());
+            
+            response.sendRedirect("/index.jsp");
+        }
+
+        
+
     }
 
     /**

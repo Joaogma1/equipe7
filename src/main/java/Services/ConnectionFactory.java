@@ -9,16 +9,14 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- *
- * @author Administrador
- */
 public class ConnectionFactory {
-
+    static String url =  "jdbc:mysql://35.226.108.150:3306/TADSDISTRIBUIDORA";
+    static String login = "aplicacao";
+    static String senha = "654321";
+    
     public static Connection getConnection() {
         try {
-            return DriverManager.getConnection(
-                    "jdbc:mysql://35.226.108.150:3306/TADSDISTRIBUIDORA", "aplicacao", "senhadificil");
+            return DriverManager.getConnection(url,login , senha);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
