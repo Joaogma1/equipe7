@@ -20,7 +20,7 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "insert into TIPO_USUARIO(NOME) VALUES ('?') ";
+            String sql = "insert into TIPO_USUARIO(NOME) VALUES (?) ";
 
             PreparedStatement pst = con.prepareStatement(sql);
 

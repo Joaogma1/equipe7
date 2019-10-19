@@ -28,7 +28,7 @@
             </button>
 
         </nav>
-        <form class="d-flex justify-content-center" action="${pageContext.request.contextPath}/tipoUsuario" method="post">
+        <form class="d-flex justify-content-center" action="${pageContext.request.contextPath}/tipousuario" method="post">
             <div class="form-row align-items-center">
                 <div class="col-auto">
                     <label class="sr-only" for="nome">nome</label>
@@ -43,23 +43,31 @@
             </div>
         </form>
 
-        <table class=" table table-hover col-md-6">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Cargo</th>
-                    <th scope="col">Opcoes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${lista}" var="tipoUsuario">
+        <div>
+            <table class=" table table-hover col-md-6">
+                <thead>
                     <tr>
-                        <th scope="row"><c:out value="${tipoUsuario.id}" /></th>
-                        <th><c:out value="${tipoUsuario.nome}" /></th>
-                        <td><a style="color: black"><i class="fas fa-pencil-alt"></i></a> | <a style="color: red"><i  class="fas fa-trash-alt"></i></a></td>
+                        <th scope="col">#</th>
+                        <th scope="col">Cargo</th>
+                        <th scope="col">Opcoes</th>
                     </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <c:forEach items="${lista}" var="tipoUsuario">
+                        <tr>
+                            <th scope="row"><c:out value="${tipoUsuario.id}" /></th>
+                            <th><c:out value="${tipoUsuario.nome}" /></th>
+                            <td>
+                                <form action="${pageContext.request.contextPath}/tipousuario?id=${tipoUsuario.id}" id="tipoUsuario${tipoUsuario.id}" method="get">
+                                    <input type="hidden" value="${tipoUsuario.id}" name="id">
+                                    <input type="hidden" name="acao" value ="deletar" >
+                                    <button type="submit" class="btn btn-outline-danger">deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </tbody>
+            </table>
+        </div>
     </body>
 </html>

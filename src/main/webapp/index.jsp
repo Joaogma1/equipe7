@@ -29,7 +29,10 @@
                         <a class="nav-link" href="#Sobre">Sobre a empresa</a>
                     </li>
                 </ul>
-                <a class= "btn btn-outline-primary my-2 my-sm-0" href="${pageContext.request.contextPath}/login.jsp">Entrada funcionarios</a>
+                <form action="${pageContext.request.contextPath}/tipousuario" method="get">
+                    <input type="hidden" value="listar" name="acao">
+                    <button class= "btn btn-outline-primary my-2 my-sm-0" type="submit">Entrada funcionarios</button>
+                </form>
             </div>
         </nav>
 
