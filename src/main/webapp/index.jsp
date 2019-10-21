@@ -12,30 +12,7 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-            <a class="navbar-brand" href="">
-                <img src="${pageContext.request.contextPath}/images/logo.png" height="50" width="50" alt="logo empresa"/>
-                Distribuidora
-            </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#Sobre">Sobre a empresa</a>
-                    </li>
-                </ul>
-                <form action="${pageContext.request.contextPath}/tipousuario" method="get">
-                    <input type="hidden" value="listar" name="acao">
-                    <button class= "btn btn-outline-primary my-2 my-sm-0" type="submit">Entrada funcionarios</button>
-                </form>
-            </div>
-        </nav>
-
+        <%@include file="/PaginaBase/navIndex.jspf"  %>
 
         <div class="jumbotron text-center">
             <h1 class="text-white">Distribuidora TADS <span class="badge badge-primary text-white">Alpha <i class="fas fa-vial"></i></span></h1>
@@ -84,18 +61,12 @@
 
             </div>
         </div>
-
-        <hr class="featurette-divider">
-
-
-
-        <div class="jumbotron text-center" id="footer" style="margin-bottom:0">
-            <p class="text-xs-center text-white">&copy; Copyright 2019 - São Paulo. Todos direitos reservados.</p>
-        </div>
+        <%@include file="/PaginaBase/rodape.jspf" %>
     </body>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
     <style>
         *{
             font-family: 'Roboto Condensed', sans-serif;

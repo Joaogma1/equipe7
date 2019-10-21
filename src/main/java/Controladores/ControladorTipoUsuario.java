@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controladores;
 
 import Dominios.TipoUsuario;
@@ -32,23 +27,23 @@ public class ControladorTipoUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String acao = request.getParameter("acao");
+            String acao = "listar";
+
+            if (!request.getParameter("acao").isEmpty()) {
+                acao = request.getParameter("acao");
+            }
+
             if (acao.equalsIgnoreCase("listar")) {
-                ArrayList<TipoUsuario> tu = (ArrayList) _iTipoUser.GetAll();
-                ArrayList<TipoUsuario> teste = tu;
-                request.setAttribute("lista", teste);
+
+                List<TipoUsuario> tu = _iTipoUser.GetAll();
+
+                request.setAttribute("lista", tu);
+
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/tiposUsuarios.jsp");
                 dispatcher.forward(request, response);
+
             } else if (acao.equalsIgnoreCase("deletar")) {
                 doDelete(request, response);
-            } else if (acao.equalsIgnoreCase("editar")) {
-                doPut(request, response);
-            }else{
-                 ArrayList<TipoUsuario> tu = (ArrayList) _iTipoUser.GetAll();
-                ArrayList<TipoUsuario> teste = tu;
-                request.setAttribute("lista", teste);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/tiposUsuarios.jsp");
-                dispatcher.forward(request, response);
             }
 
         } catch (Exception e) {
@@ -58,17 +53,20 @@ public class ControladorTipoUsuario extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        TipoUsuario tipoUser = new TipoUsuario();
+        try {
+            if (new Integer(request.getParameter("id")) != 0) {
+                doPut(request, response);
+            } else {
+                TipoUsuario tipoUser = new TipoUsuario();
 
-        tipoUser.setNome(request.getParameter("nome"));
+                tipoUser.setNome(request.getParameter("nome"));
+                tipoUser.setNivel(new Integer(request.getParameter("nivelacesso")));
 
-        request.setAttribute("nome", tipoUser.getNome());
+                _iTipoUser.Add(tipoUser);
+            }
 
-        _iTipoUser.Add(tipoUser);
-
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/tipousuario");
-        dispatcher.forward(request, response);
+        } catch (Exception e) {
+        }
 
     }
 
@@ -81,10 +79,10 @@ public class ControladorTipoUsuario extends HttpServlet {
         tipoUser.setId(new Integer(id));
 
         _iTipoUser.Remove(tipoUser.getId());
-
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/tipousuario");
+        request.removeAttribute("id");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/tiposUsuarios?acao=listar");
         dispatcher.forward(request, response);
+
     }
 
     @Override
@@ -93,18 +91,14 @@ public class ControladorTipoUsuario extends HttpServlet {
 
         String id = request.getParameter("id");
         String nome = request.getParameter("nome");
-
-        request.setAttribute("id", id);
-        request.setAttribute("nome", nome);
+        String nivel = request.getParameter("nivelacesso");
 
         tipoUser.setId(new Integer(id));
         tipoUser.setNome(nome);
+        tipoUser.setNivel(new Integer(nivel));
 
         _iTipoUser.Update(tipoUser);
 
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/tipousuario");
-        dispatcher.forward(request, response);
     }
 
 }

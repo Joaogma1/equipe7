@@ -1,0 +1,8 @@
+
+<%@ page pageEncoding="windows-1252" %>
+
+<hr class="featurette-divider">
+
+<div class="jumbotron text-center" id="footer" style="margin-bottom:0">
+    <p class="text-xs-center text-white">&copy; Copyright 2019 - São Paulo. Todos direitos reservados.</p>
+</div>
