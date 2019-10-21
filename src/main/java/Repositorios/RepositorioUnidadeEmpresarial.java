@@ -22,7 +22,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "INSERT INTO TADSDISTRIBUIDORA.UNIDADE_EMPRESARIAL(NOME_UNIDADE) VALUES(?)";
+            String sql = "INSERT INTO UNIDADE_EMPRESARIAL(NOME_UNIDADE) VALUES(?)";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -50,7 +50,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT ID, NOME_UNIDADE AS NOME FROM TADSDISTRIBUIDORA.UNIDADE_EMPRESARIAL UE where UE.ID = ?";
+            String sql = "SELECT ID, NOME_UNIDADE AS NOME FROM UNIDADE_EMPRESARIAL UE where UE.ID = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -83,7 +83,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT ID, NOME_UNIDADE AS NOME FROM TADSDISTRIBUIDORA.UNIDADE_EMPRESARIAL";
+            String sql = "SELECT ID, NOME_UNIDADE AS NOME FROM UNIDADE_EMPRESARIAL";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -142,7 +142,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "delete from TADSDISTRIBUIDORA.UNIDADE_EMPRESARIAL where TADSDISTRIBUIDORA.UNIDADE_EMPRESARIAL.ID = ?";
+            String sql = "delete from UNIDADE_EMPRESARIAL where UNIDADE_EMPRESARIAL.ID = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -168,7 +168,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         private UnidadeEmpresarial map(ResultSet rs) throws SQLException {
         UnidadeEmpresarial ue = new UnidadeEmpresarial();
         ue.setId(rs.getInt("ID"));
-        ue.setNomeUnidade("NOME");
+        ue.setNomeUnidade(rs.getString("NOME"));
         return ue;
     }
     

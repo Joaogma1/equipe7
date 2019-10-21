@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Repositorios;
 
 import Dominios.TipoUsuario;
@@ -20,10 +15,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Administrador
- */
 public class RepositorioUsuario implements InterfaceUsuario {
 
     public Usuario buscarPorEmailSenha(String email, String senha) {
@@ -32,7 +23,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
+            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, TU.NIVEL_ACESSO , UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
                     + "FROM TADSDISTRIBUIDORA.USUARIO U INNER JOIN TIPO_USUARIO TU ON U.ID_TIPO_USUARIO = TU.ID INNER JOIN UNIDADE_EMPRESARIAL UE ON U.ID_UNIDADE = UE.ID WHERE EMAIL = ? AND SENHA = ? AND ATIVO = 1";
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -98,7 +89,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
+            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, TU.NIVEL_ACESSO, UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
                     + "FROM TADSDISTRIBUIDORA.USUARIO U INNER JOIN TIPO_USUARIO TU ON U.ID_TIPO_USUARIO = TU.ID INNER JOIN UNIDADE_EMPRESARIAL UE ON U.ID_UNIDADE = UE.ID WHERE U.ID = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
@@ -132,7 +123,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
+            String sql = "SELECT U.ID, EMAIL,TU.ID AS ID_TIPOUSER, TU.NOME AS NOME_TIPO_USUARIO, TU.NIVEL_ACESSO, UE.ID AS ID_UNIDADE_EMPRESARIAL, UE.NOME_UNIDADE, U.DATA_REGISTRO\n"
                     + "FROM TADSDISTRIBUIDORA.USUARIO U INNER JOIN TIPO_USUARIO TU ON U.ID_TIPO_USUARIO = TU.ID INNER JOIN UNIDADE_EMPRESARIAL UE ON U.ID_UNIDADE = UE.ID";
 
             PreparedStatement pst = con.prepareStatement(sql);
@@ -163,7 +154,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "UPDATE TADSDISTRIBUIDORA.USUARIO SET EMAIL  = ?, SENHA  = ?, ID_TIPO_USUARIO =?, ID_UNIDADE=? WHERE ID  = ?";
+            String sql = "UPDATE USUARIO SET EMAIL  = ?, SENHA  = ?, ID_TIPO_USUARIO =?, ID_UNIDADE=? WHERE ID  = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -172,7 +163,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
 
             pst.setInt(3, obj.getId());
             pst.setInt(4, obj.getId());
-            
+
             pst.setInt(5, obj.getId());
 
             pst.execute();
@@ -196,16 +187,26 @@ public class RepositorioUsuario implements InterfaceUsuario {
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "DELETE from TADSDISTRIBUIDORA.USUARIO where TADSDISTRIBUIDORA.USUARIO.ID = ?";
+            String sql = "DELETE from USUARIO where USUARIO.ID = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setInt(1, id);
-            
+
             pst.execute();
-            
+
         } catch (SQLException e) {
-            throw new RepException("Operação não realizada com sucesso.", e);
+            System.out.println(new RepException("Operação não realizada com sucesso.", e));
+            try {
+                String sqlExc = "UPDATE USUARIO SET ATIVO = 0 where USUARIO.ID = ?";
+                PreparedStatement pstExc = con.prepareStatement(sqlExc);
+                pstExc.setInt(1, id);
+                pstExc.executeUpdate();
+            } catch (SQLException ex) {
+                Logger.getLogger(RepositorioUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(RepositorioTipoUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
@@ -232,7 +233,9 @@ public class RepositorioUsuario implements InterfaceUsuario {
         u.setIdUnidade(ue);
 
         TipoUsuario tu = new TipoUsuario(rs.getInt("ID_TIPOUSER"), rs.getString("NOME_TIPO_USUARIO"));
+        tu.setNivel(rs.getInt("NIVEL_ACESSO"));
         u.setIdTipoUsuario(tu);
+        
         return u;
     }
 
