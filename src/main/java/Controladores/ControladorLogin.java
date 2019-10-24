@@ -42,6 +42,7 @@ public class ControladorLogin extends HttpServlet {
             sessao.setAttribute("id", usuarioBuscado.getId());
             sessao.setAttribute("nivelacesso",usuarioBuscado.getIdTipoUsuario().getNivel());
             sessao.setAttribute("unidade",usuarioBuscado.getIdUnidadeEmp());
+            sessao.setAttribute("email", usuarioBuscado.getEmail());
 
             response.sendRedirect("/EquipeSetePi/index.jsp");
         } else {

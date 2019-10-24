@@ -57,7 +57,7 @@ public class RepositorioUsuario implements InterfaceUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "INSERT INTO TADSDISTRIBUIDORA.USUARIO(EMAIL,SENHA,ID_TIPO_USUARIO,ID_UNIDADE)VALUES(?,?,ID_TIPO_USUARIO,ID_UNIDADE,ATIVO);";
+            String sql = "INSERT INTO TADSDISTRIBUIDORA.USUARIO(EMAIL,SENHA,ID_TIPO_USUARIO,ID_UNIDADE)VALUES(?,?,?,?);";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -154,17 +154,16 @@ public class RepositorioUsuario implements InterfaceUsuario {
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
-            String sql = "UPDATE USUARIO SET EMAIL  = ?, SENHA  = ?, ID_TIPO_USUARIO =?, ID_UNIDADE=? WHERE ID  = ?";
+            String sql = "UPDATE USUARIO SET EMAIL  = ?, ID_TIPO_USUARIO =?, ID_UNIDADE=? WHERE ID  = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
             pst.setString(1, obj.getEmail());
-            pst.setString(2, obj.getSenha());
 
-            pst.setInt(3, obj.getId());
+            pst.setInt(2, obj.getidCargo());
+            pst.setInt(3, obj.getIdUnidadeEmp());
+
             pst.setInt(4, obj.getId());
-
-            pst.setInt(5, obj.getId());
 
             pst.execute();
 

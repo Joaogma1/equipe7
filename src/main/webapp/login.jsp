@@ -16,10 +16,10 @@
     </head>
     <body>
         <form class="form-signin" action="${pageContext.request.contextPath}/login" method="post">
+            
             <div class="text-center mb-4">
                 <a href="${pageContext.request.contextPath}/index.jsp"><img class="mb-4" src="${pageContext.request.contextPath}/images/logo.png" alt="logo empresa" width="72" height="72"></a>
                 <h1 class="h3 mb-3 font-weight-normal">Login</h1>
-
             </div>
             <div class="form-label-group">
                 <input type="email" id="email" name="email" class="form-control" placeholder="Endereco de Email" required autofocus>

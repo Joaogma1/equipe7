@@ -108,8 +108,11 @@ public class ControladorUsuario extends HttpServlet {
         int idUnidade = new Integer(request.getParameter("idunidade"));
         int idCargo = new Integer(request.getParameter("idcargo"));
         String Email = request.getParameter("email");
-        String senha = request.getParameter("senha");
-        Usuario user = new Usuario(id, Email, senha);
+        
+        Usuario user = new Usuario();
+        user.setEmail(Email);
+        user.setId(id);
+        
         user.setidCargo(idCargo);
         user.setIdUnidadeEmp(idUnidade);
         _iusuario.Update(user);
