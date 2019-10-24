@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.pi.equipe7_EquipeSetePi_war_1.0-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>Dominios.TipoUsuario</class>
+    <class>Dominios.UnidadeEmpresarial</class>
+    <class>Dominios.Usuario</class>
+    <class>Dominios.Cliente</class>
+    <class>Dominios.ItemVenda</class>
+    <class>Dominios.Venda</class>
+    <class>Dominios.Produto</class>
+    <class>Dominios.ProdutoUnidade</class>
+    <class>Dominios.Item</class>
+    <class>Dominios.Funcionario</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://35.226.108.150:3306/TADSDISTRIBUIDORA?zeroDateTimeBehavior=convertToNull"/>
+      <property name="javax.persistence.jdbc.user" value="joao"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.password" value="Poli2541"/>
+    </properties>
+  </persistence-unit>
+</persistence>
