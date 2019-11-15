@@ -109,7 +109,6 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-
                                 <div class="form-group">
                                     <select name="idunidade" class="form-control" id="idunidade${usuario.id}">
                                         <option value="${usuario.idUnidade.id}" selected="selected" disabled="disabled">Unidade atual <c:out value="${usuario.idUnidade.nomeUnidade}"/></option>
@@ -120,7 +119,6 @@
                                 </div>
                                 <button onclick="Atualizar(${usuario.id})" class="btn btn-primary btn-default">Salvar Mudancas</button>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>

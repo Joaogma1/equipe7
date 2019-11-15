@@ -108,7 +108,7 @@
         async function Deletar(id) {
 
         await  $.ajax({
-        url: "http://localhost:8084${pageContext.request.contextPath}//unidadeempresarial?id=" + id + "&acao=deletar",
+        url: "http://localhost:8084${pageContext.request.contextPath}/unidadeempresarial?id=" + id + "&acao=deletar",
                 type: 'GET',
                 complete: function (jqXHR, textStatus) {
                 window.location.reload()
