@@ -11,77 +11,71 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ControladorUnidadeEmpresarial", urlPatterns = {"/unidadeempresarial"})
 public class ControladorUnidadeEmpresarial extends HttpServlet {
-    
+
     private InterfaceUnidadeEmpresarial _iUniEmp;
 
     public ControladorUnidadeEmpresarial() {
         this._iUniEmp = new RepositorioUnidadeEmpresarial();
     }
-    
-   
-@Override
+
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String acao = "listar";
-            if (!request.getParameter("acao").isEmpty()) {
-                acao = request.getParameter("acao");
-            }
+            HttpSession sessao = request.getSession();
 
-            if (acao.equalsIgnoreCase("listar")) {
-
-                List<UnidadeEmpresarial> tu = _iUniEmp.GetAll();
+            if (sessao.getAttribute("unidade") == null) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/acessoNegado.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                List<UnidadeEmpresarial> tu = _iUniEmp.GetAll(new Integer(sessao.getAttribute("unidade").toString()));
 
                 request.setAttribute("lista", tu);
 
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/unidadeEmpresarial.jsp");
                 dispatcher.forward(request, response);
-
-            } else if (acao.equalsIgnoreCase("deletar")) {
-                doDelete(request, response);
             }
 
         } catch (Exception e) {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        try {
-            if (new Integer(request.getParameter("id")) != 0) {
-                doPut(request, response);
-            } else {
-                UnidadeEmpresarial unidadeEmp = new UnidadeEmpresarial();
-
-                unidadeEmp.setNomeUnidade(request.getParameter("nome"));
-
-                _iUniEmp.Add(unidadeEmp);
-            }
-
-        } catch (Exception e) {
-        }
-
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UnidadeEmpresarial unidadeEmp = new UnidadeEmpresarial();
-
-        String id = request.getParameter("id");
-
-        unidadeEmp.setId(new Integer(id));
-
-        _iUniEmp.Remove(unidadeEmp.getId());
-        request.removeAttribute("id");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/unidadeempresarial?acao=listar");
-        dispatcher.forward(request, response);
-
-    }
-
+//    @Override
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//        try {
+//            if (new Integer(request.getParameter("id")) != 0) {
+//                doPut(request, response);
+//            } else {
+//                UnidadeEmpresarial unidadeEmp = new UnidadeEmpresarial();
+//
+//                unidadeEmp.setNomeUnidade(request.getParameter("nome"));
+//
+//                _iUniEmp.Add(unidadeEmp,0);
+//            }
+//
+//        } catch (Exception e) {
+//        }
+//
+//    }
+//    @Override
+//    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        UnidadeEmpresarial unidadeEmp = new UnidadeEmpresarial();
+//
+//        String id = request.getParameter("id");
+//
+//        unidadeEmp.setId(new Integer(id));
+//
+//        _iUniEmp.Remove(unidadeEmp.getId());
+//        request.removeAttribute("id");
+//        RequestDispatcher dispatcher = request.getRequestDispatcher("/unidadeempresarial?acao=listar");
+//        dispatcher.forward(request, response);
+//
+//    }
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UnidadeEmpresarial unidadeEmp = new UnidadeEmpresarial();

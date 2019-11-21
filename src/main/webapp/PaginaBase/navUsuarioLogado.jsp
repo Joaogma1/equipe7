@@ -1,3 +1,4 @@
+<%@ page session="true" %>
 <%@page contentType="text/html" pageEncoding="windows-1252"%>
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 

@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public class RepositorioCliente implements InterfaceCliente {
 
-    public void Add(Cliente obj) {
+    public void Add(Cliente obj, int idfilial) {
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
@@ -51,7 +51,7 @@ public class RepositorioCliente implements InterfaceCliente {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Cliente> GetAll() {
+    public List<Cliente> GetAll(int idFilial) {
 
         Connection con = null;
         List<Cliente> listaCliente = new ArrayList<Cliente>();

@@ -52,12 +52,22 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "TELEFONE")
     private String telefone;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedor")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcionario")
     private Collection<Venda> vendaCollection;
     @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Usuario idUsuario;
+    
+    private int idUser;
 
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
+    }
+    
     public Funcionario() {
     }
 

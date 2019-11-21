@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresarial{
 
-    public void Add(UnidadeEmpresarial obj) {
+    public void Add(UnidadeEmpresarial obj, int idfilial) {
                 Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
@@ -77,7 +77,7 @@ public class RepositorioUnidadeEmpresarial implements InterfaceUnidadeEmpresaria
         return uniEmp;
     }
 
-    public List<UnidadeEmpresarial> GetAll() {
+    public List<UnidadeEmpresarial> GetAll(int idFilial) {
         Connection con = null;
         List<UnidadeEmpresarial> listaUniEmp = new ArrayList<UnidadeEmpresarial>();
         try {

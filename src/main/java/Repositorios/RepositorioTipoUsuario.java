@@ -15,17 +15,16 @@ import java.util.logging.Logger;
 
 public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
 
-    public void Add(TipoUsuario obj) {
+    public void Add(TipoUsuario obj, int idfilial) {
         Connection con = null;
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "insert into TIPO_USUARIO(NOME, NIVEL_ACESSO) VALUES (?,?) ";
+            String sql = "insert into TIPO_USUARIO(NOME) VALUES (?) ";
 
             PreparedStatement pst = con.prepareStatement(sql);
             
             pst.setString(1, obj.getNome());
-            pst.setInt(2, obj.getNivel());
 
             pst.execute();
         } catch (SQLException e) {
@@ -49,7 +48,7 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "select ID, NOME , NIVEL_ACESSO from TIPO_USUARIO TU where TU.ID = ?";
+            String sql = "select ID, NOME from TIPO_USUARIO TU where TU.ID = ?";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -76,13 +75,13 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
         return tipoUser;
     }
 
-    public List<TipoUsuario> GetAll() {
+    public List<TipoUsuario> GetAll(int idFilial) {
         Connection con = null;
         List<TipoUsuario> listaTipoUser = new ArrayList<TipoUsuario>();
         try {
             con = ConnectionFactory.getConnection();
 
-            String sql = "select ID, NOME, NIVEL_ACESSO from TIPO_USUARIO";
+            String sql = "select ID, NOME from TIPO_USUARIO";
 
             PreparedStatement pst = con.prepareStatement(sql);
 
@@ -170,7 +169,6 @@ public class RepositorioTipoUsuario implements InterfaceTipoUsuario {
         TipoUsuario tu = new TipoUsuario();
         tu.setId(rs.getInt("ID"));
         tu.setNome(rs.getString("NOME"));
-        tu.setNivel(rs.getInt("NIVEL_ACESSO"));
         return tu;
     }
 }

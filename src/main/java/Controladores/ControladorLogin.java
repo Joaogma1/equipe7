@@ -1,4 +1,3 @@
-
 package Controladores;
 
 import Dominios.Usuario;
@@ -23,6 +22,20 @@ public class ControladorLogin extends HttpServlet {
     public ControladorLogin() {
         this._iusuario = new RepositorioUsuario();
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession sessao = req.getSession();
+
+        if (sessao.getAttribute("unidade") == null) {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/produto");
+            dispatcher.forward(req, resp);
+        }
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,14 +53,16 @@ public class ControladorLogin extends HttpServlet {
         if (usuarioBuscado != null) {
             HttpSession sessao = request.getSession();
             sessao.setAttribute("id", usuarioBuscado.getId());
-            sessao.setAttribute("nivelacesso",usuarioBuscado.getIdTipoUsuario().getNivel());
-            sessao.setAttribute("unidade",usuarioBuscado.getIdUnidadeEmp());
+            sessao.setAttribute("unidade", usuarioBuscado.getIdUnidadeEmp());
             sessao.setAttribute("email", usuarioBuscado.getEmail());
+            sessao.setAttribute("usuario", usuarioBuscado);
 
-            response.sendRedirect("/EquipeSetePi/index.jsp");
+            response.sendRedirect("/EquipeSetePi/produto");
         } else {
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/login.jsp");
+            request.setAttribute("mensagem", "Dados de entrada incorretos");
+            request.setAttribute("falha", true);
             dispatcher.forward(request, response);
         }
 

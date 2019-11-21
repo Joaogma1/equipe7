@@ -49,7 +49,7 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "ESTADO")
     private String estado;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "comprador")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cliente")
     private Collection<Venda> vendaCollection;
 
     public Cliente() {

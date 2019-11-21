@@ -8,10 +8,11 @@ import javax.persistence.metamodel.CollectionAttribute;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-11-14T21:34:21")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2019-11-21T01:45:53")
 @StaticMetamodel(Funcionario.class)
 public class Funcionario_ { 
 
+    public static volatile SingularAttribute<Funcionario, Integer> idUser;
     public static volatile SingularAttribute<Funcionario, String> telefone;
     public static volatile SingularAttribute<Funcionario, BigDecimal> salario;
     public static volatile SingularAttribute<Funcionario, Usuario> idUsuario;

@@ -49,10 +49,10 @@ public class Venda implements Serializable {
     private Date dataVenda;
     @JoinColumn(name = "VENDEDOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Funcionario vendedor;
+    private Funcionario funcionario;
     @JoinColumn(name = "COMPRADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private Cliente comprador;
+    private Cliente cliente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idItem")
     private Collection<ItemVenda> itemVendaCollection;
 
@@ -95,20 +95,20 @@ public class Venda implements Serializable {
         this.dataVenda = dataVenda;
     }
 
-    public Funcionario getVendedor() {
-        return vendedor;
+    public Funcionario getFuncionario() {
+        return funcionario;
     }
 
-    public void setVendedor(Funcionario vendedor) {
-        this.vendedor = vendedor;
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
     }
 
-    public Cliente getComprador() {
-        return comprador;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setComprador(Cliente comprador) {
-        this.comprador = comprador;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     @XmlTransient

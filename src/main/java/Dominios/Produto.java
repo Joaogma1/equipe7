@@ -58,6 +58,17 @@ public class Produto implements Serializable {
     private UnidadeEmpresarial idOrigem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idProduto")
     private Collection<ProdutoUnidade> produtoUnidadeCollection;
+    
+    private Integer idOrigemNav;
+
+    public Integer getIdOrigemNav() {
+        return idOrigemNav;
+    }
+
+    public void setIdOrigemNav(Integer idOrigemNav) {
+        this.idOrigemNav = idOrigemNav;
+    }
+    
 
     public Produto() {
     }
