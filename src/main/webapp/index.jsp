@@ -42,8 +42,8 @@
 
         <div id="Sobre" class="row featurette ">
             <div class="col-md-7">
-                <h2 class="featurette-heading">Sobre nos.</h2>
-                <p class="lead">A empresa Tades Ltda. E uma empresa que atua no ramo de distribuicao de bebidas, fundada em 2009 pelos irmaos Antonio e Joana Tades, Possui sua matriz localizada em Sao Paulo.</p>
+                <h2 class="featurette-heading">Sobre nós: </h2>
+                <p class="lead">A empresa Tades Ltda. é uma empresa que atua no ramo de distribuição de bebidas, fundada em 2009 pelos irmãos Antonio e Joana Tades, Possui sua matriz localizada em Sao Paulo e mais três filiais espalhadas pelo país.</p>
             </div>
             <div class="col-md-5">
                 <img class="img-thumbnail" src="https://d1lc5plzz0mq74.cloudfront.net/wp-content/uploads/2017/05/29082400/black-belt-sao-paulo.jpg" width="500" height="500" alt="Cidade de Sao Paulo">
@@ -54,8 +54,8 @@
         <div id="Sobre2" class="row featurette">
 
             <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Sim hehe. <span class="text-muted">Ta muito boa essa pagina depois me agradece.</span></h2>
-                <p class="lead">Escreve qualquer coisa aqui que vai ficar bom de qualquer jeito, o importante e estar bonito</p>
+                <h2 class="featurette-heading">Nosso diferencial: <span class="text-muted">Nós da TADS Ltda. realizamos vendas de bebidas para você comerciante.</span></h2>
+                <p class="lead">Nós trazemos comércio de bebidas que o Brasil merece! </p>
             </div>
             <div class="col-md-5 order-md-1">
                 <img class="img-thumbnail" src="https://static.docsity.com/documents_pages/notas/2012/11/06/7aeec7e59196d925b6b460d1753e1f35.png" width="500" height="500" alt="Cidade de Sao Paulo">

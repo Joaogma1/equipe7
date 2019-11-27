@@ -4,6 +4,7 @@ package Dominios;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -68,6 +69,7 @@ public class Usuario implements Serializable {
     private int idCargo;
 
     private int IdUnidadeEmp;
+    private List<TipoUsuario> tipous;
 
     public int getidCargo() {
         return idCargo;
@@ -181,6 +183,14 @@ public class Usuario implements Serializable {
             return false;
         }
         return true;
+    }
+    public boolean verificarPapel(String nomeCargo) {
+        for (TipoUsuario t : tipous) {
+            if (t.getNome().equals(nomeCargo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

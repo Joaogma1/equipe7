@@ -3,6 +3,7 @@ package Dominios;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -37,6 +38,7 @@ public class TipoUsuario implements Serializable {
     private String nome;
     @Column(name = "NIVEL_ACESSO")
     private Integer nivel;
+   
 
     public Integer getNivel() {
         return nivel;
@@ -106,6 +108,8 @@ public class TipoUsuario implements Serializable {
         }
         return true;
     }
+   
+    
 
     @Override
     public String toString() {
