@@ -1,5 +1,5 @@
-package Repositorios;
-
+//package Repositorios;
+/*
 import Dominios.Cliente;
 import Dominios.ItemVenda;
 import Dominios.Venda;

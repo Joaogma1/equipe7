@@ -16,7 +16,7 @@ public class ControladorLogout extends HttpServlet {
     private void sair(HttpServletRequest request, 
             HttpServletResponse response) 
             throws ServletException, IOException {
-        // Invalidar sessao do usuario
+        // Invalidar sessao do usuario fazendo com o que o mesmo seja deslogado.
         HttpSession sessao = request.getSession();
         sessao.invalidate();
         

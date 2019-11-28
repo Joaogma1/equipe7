@@ -29,9 +29,11 @@ public class ControladorUnidadeEmpresarial extends HttpServlet {
             HttpSession sessao = request.getSession();
 
             if (sessao.getAttribute("unidade") == null) {
+                //Verifica se o usuario esta logado.
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/acessoNegado.jsp");
                 dispatcher.forward(request, response);
             } else {
+                //Lista todas as unidades empresarial
                 List<UnidadeEmpresarial> tu = _iUniEmp.GetAll(new Integer(sessao.getAttribute("unidade").toString()));
 
                 request.setAttribute("lista", tu);

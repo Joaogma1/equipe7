@@ -26,14 +26,14 @@ public class ControladorLogin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession sessao = request.getSession();
-
+//Verifica se a sessão está vazia 
         if (sessao.getAttribute("unidade") != null) {
             response.sendRedirect(request.getContextPath() + "/home.jsp");
             return;
             
             
         } 
-           
+           //Se a sessão estiver vazia retorna para a página de login
             RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
            dispatcher.forward(request, response);
         
@@ -62,6 +62,7 @@ public class ControladorLogin extends HttpServlet {
 
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
+            // Caso o usuario buscado seja nulo ele retornara a pagina de login
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/login.jsp");
             request.setAttribute("mensagem", "Dados de entrada incorretos");

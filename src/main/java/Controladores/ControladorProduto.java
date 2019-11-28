@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controladores;
 
 import Dominios.Produto;
@@ -19,10 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author Administrador
- */
 @WebServlet(name = "ControladorProduto", urlPatterns = {"/produto"})
 public class ControladorProduto extends HttpServlet {
 
@@ -37,9 +29,11 @@ public class ControladorProduto extends HttpServlet {
         HttpSession sessao = request.getSession();
         
         if (sessao.getAttribute("unidade") == null) {
+            //Vereficia se o usuario está logado, se não estiver ele retorna para a pagina acesso negado.
             RequestDispatcher dispatcher = request.getRequestDispatcher("/acessoNegado.jsp");
             dispatcher.forward(request, response);
         } else {
+            //Lista todos os produtos selecionados na sessão do usuario.
             List<Produto> p = _iProduto.GetAll(new Integer(sessao.getAttribute("unidade").toString()));
             request.setAttribute("lista", p);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/produtos.jsp");
