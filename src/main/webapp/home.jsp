@@ -7,30 +7,24 @@
         <title>Home</title>
     </head>
     <body>
-        <h1>Home</h1>
+        <h1>Bem-vindo você tem acesso ao sistema.</h1>
         <c:choose>
             <c:when test="${sessionScope.usuario != null}">
                 <div>
-                    <h2>Bem vindo  <c:out value="${sessionScope.usuario.email}" /></h2>
-                   
-                    <p>Papeis</p>
-                    <ul>
-                        <c:forEach items="${sessionScope.usuario.tipous}" var="pap">
-                            <li><c:out value="${pap.nome}" /></li>
-                        </c:forEach>
-                    </ul>
+                    <h2>Seu cargo:  <c:out value="${sessionScope.tipousuario.nome}" /></h2>
+                    
                      <h2>Links de acesso</h2>
                     <ul>
-                        <c:if test="${sessionScope.usuario.verificarPapel('Administrativo')}">
+                        <c:if test="${sessionScope.tipousuario.verificarPapel('Administrativo')}">
                             <li><a href="${pageContext.request.contextPath}/protegido/administrativo-page">Entrar na página do setor administrativo</a></li>
                         </c:if>
-                        <c:if test="${sessionScope.usuario.verificarPapel('Retaguarda')}">
+                        <c:if test="${sessionScope.tipousuario.verificarPapel('Retaguarda')}">
                             <li><a href="${pageContext.request.contextPath}/protegido/retaguarda-page">Entrar na página do setor retaguarda</a></li>
                         </c:if>
-                        <c:if test="${sessionScope.usuario.verificarPapel('TI')}">
+                        <c:if test="${sessionScope.tipousuario.verificarPapel('TI')}">
                             <li><a href="${pageContext.request.contextPath}/protegido/ti-page">Entrar na página do setor TI</a></li>
                         </c:if>
-                            <c:if test="${sessionScope.usuario.verificarPapel('Vendas')}">
+                            <c:if test="${sessionScope.tipousuario.verificarPapel('Vendas')}">
                             <li><a href="${pageContext.request.contextPath}/protegido/vendas-page">Entrar na pagina do setor de Vendas</a></li>
                         </c:if>
                     </ul>
@@ -41,6 +35,7 @@
             <c:otherwise>
                 <div>
                     <p>Usuário não fez login</p>
+                    <a href="${pageContext.request.contextPath}/logout">Voltar</a>
                 </div>
             </c:otherwise>
         </c:choose>

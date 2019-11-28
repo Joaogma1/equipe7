@@ -1,6 +1,7 @@
 
 package Dominios;
 
+import Autenticador.Papel;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -69,7 +70,7 @@ public class Usuario implements Serializable {
     private int idCargo;
 
     private int IdUnidadeEmp;
-    private List<TipoUsuario> tipous;
+    
 
     public int getidCargo() {
         return idCargo;
@@ -184,14 +185,7 @@ public class Usuario implements Serializable {
         }
         return true;
     }
-    public boolean verificarPapel(String nomeCargo) {
-        for (TipoUsuario t : tipous) {
-            if (t.getNome().equals(nomeCargo)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    
 
     @Override
     public String toString() {

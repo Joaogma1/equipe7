@@ -1,6 +1,7 @@
 
 package Autenticador;
 
+import Dominios.TipoUsuario;
 import Dominios.Usuario;
 import java.io.IOException;
 import java.io.PrintStream;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebFilter(filterName = "AutorizacaoFilter", 
-        servletNames = { "HomeServlet" },
+        servletNames = { "ControladorHome" },
         urlPatterns = { "/protegido/*" })
 public class AutorizacaoFilter implements Filter {
 
@@ -35,9 +36,10 @@ public class AutorizacaoFilter implements Filter {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/login");
             return;
         }
+        
         // Verificar se usuario tem permissao de acesso na pagina
-        Usuario usuario = (Usuario) sessao.getAttribute("usuario");
-        if (verificarPermissaoAcesso(httpRequest, usuario)) {
+        TipoUsuario tipousuario = (TipoUsuario) sessao.getAttribute("tipousuario");
+        if (verificarPermissaoAcesso(httpRequest, tipousuario)) {
             chain.doFilter(request, response);
         } else {
             httpResponse.sendRedirect(httpRequest.getContextPath() + "/acessoNegado.jsp");
@@ -45,21 +47,21 @@ public class AutorizacaoFilter implements Filter {
     }
     
     private boolean verificarPermissaoAcesso(
-            HttpServletRequest httpRequest, Usuario usuario) {
+        HttpServletRequest httpRequest, TipoUsuario tipousuario) {
         String urlAcessada = httpRequest.getRequestURI();
         if (urlAcessada.endsWith("/home")) {
             return true;
         } else if (urlAcessada.endsWith("/protegido/Administrativo") 
-                && usuario.verificarPapel("Administrativo")) {
+                && tipousuario.verificarPapel("Administrativo")) {
             return true;
         } else if (urlAcessada.endsWith("/protegido/Retaguarda") 
-                && usuario.verificarPapel("Retaguarda")) {
+                && tipousuario.verificarPapel("Retaguarda")) {
             return true;
         } else if (urlAcessada.endsWith("/protegido/TI") 
-                && usuario.verificarPapel("TI")) {
+                && tipousuario.verificarPapel("TI")) {
             return true;
         }else if (urlAcessada.endsWith("/protegido/Vendas") 
-                && usuario.verificarPapel("Vendas")) {
+                && tipousuario.verificarPapel("Vendas")) {
             return true;
         }
         return false;
