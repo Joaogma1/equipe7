@@ -17,7 +17,7 @@ public class UsuarioServiceMockImpl implements UsuarioService {
         }
     }
     private void init() {
-        mapUsuarios = new LinkedHashMap<>();        
+           
     }
     @Override
     public Usuario findByUsername(String username) {

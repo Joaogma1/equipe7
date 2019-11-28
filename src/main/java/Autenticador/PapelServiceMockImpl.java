@@ -19,7 +19,7 @@ public class PapelServiceMockImpl implements PapelService {
     }
 
     private void init() {
-        mapPapeis = new LinkedHashMap<>();
+     
         mapPapeis.put("Administrativo", new Papel("Administrativo"));
         mapPapeis.put("Retaguarda", new Papel("Retaguarda"));
         mapPapeis.put("TI", new Papel("TI"));
