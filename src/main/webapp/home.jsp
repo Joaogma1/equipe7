@@ -11,9 +11,9 @@
         <c:choose>
             <c:when test="${sessionScope.usuario != null}">
                 <div>
-                    <h2>Seu cargo:  <c:out value="${sessionScope.tipousuario.nome}" /></h2>
+                   <%-- <h2>Seu cargo:  <c:out value="${sessionScope.tipousuario.nome}" /></h2>
                     
-                     <h2>Links de acesso</h2>
+                     <h2>Links de acesso</h2> --%>
                     <ul>
                         <c:if test="${sessionScope.tipousuario.verificarPapel('Administrativo')}">
                             <li><a href="${pageContext.request.contextPath}/protegido/administrativo-page">Entrar na página do setor administrativo</a></li>
