@@ -1,7 +1,7 @@
 
 package Interfaces;
 
-import Dominios.Usuario;
+import Dominios.Venda;
 
 public interface InterfaceUsuario extends InterfaceBase<Usuario> {
     Usuario buscarPorEmailSenha(String email, String senha);
