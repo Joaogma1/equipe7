@@ -1,6 +1,7 @@
 
 package Dominios;
 
+import Autenticador.Papel;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -38,6 +39,15 @@ public class TipoUsuario implements Serializable {
     private String nome;
     @Column(name = "NIVEL_ACESSO")
     private Integer nivel;
+    private List<Papel> papeis;
+
+    public List<Papel> getPapeis() {
+        return papeis;
+    }
+
+    public void setPapeis(List<Papel> papeis) {
+        this.papeis = papeis;
+    }
    
 
     public Integer getNivel() {
@@ -109,7 +119,14 @@ public class TipoUsuario implements Serializable {
         return true;
     }
    
-    
+    public boolean verificarPapel(String nomePapel) {
+        for (Papel t : papeis) {
+            if (t.getNome().equals(nomePapel)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public String toString() {

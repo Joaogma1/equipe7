@@ -24,16 +24,19 @@ public class ControladorLogin extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession sessao = req.getSession();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession sessao = request.getSession();
 
-        if (sessao.getAttribute("unidade") == null) {
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/login.jsp");
-            dispatcher.forward(req, resp);
-        } else {
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/produto");
-            dispatcher.forward(req, resp);
-        }
+        if (sessao.getAttribute("unidade") != null) {
+            response.sendRedirect(request.getContextPath() + "/home.jsp");
+            return;
+            
+            
+        } 
+           
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+           dispatcher.forward(request, response);
+        
     }
 
     @Override
@@ -57,7 +60,7 @@ public class ControladorLogin extends HttpServlet {
             sessao.setAttribute("email", usuarioBuscado.getEmail());
             sessao.setAttribute("usuario", usuarioBuscado);
 
-            response.sendRedirect("/EquipeSetePi/produto");
+            response.sendRedirect(request.getContextPath() + "/home");
         } else {
             RequestDispatcher dispatcher
                     = request.getRequestDispatcher("/login.jsp");
